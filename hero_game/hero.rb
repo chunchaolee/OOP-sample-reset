@@ -1,27 +1,14 @@
-class Hero
 
-  MAX_HP = 200
-  MAX_AP = 80
+class Hero
 
   attr_accessor :hp, :name
 
-  @@heroes = []                                   # 用來儲存所有 heroes 的 array                          # 讓外部的 method 也可以抓到這兩個 variables
+  @@heroes = []                                   # 用來儲存所有 heroes 的 array                          # 讓外部 method 也可以抓到這兩個 variables
 
   def initialize(name, hp, ap)
     @name = name
-    
-    if MAX_HP < hp
-      @hp = MAX_HP
-    else
-      @hp = hp
-    end
-
-    if MAX_AP < ap
-      @ap = MAX_AP
-    else
-      @ap = ap
-    end                                       # 設定一個名為 hp（生命值）的 attribute
-
+    @hp = hp
+    @ap = ap
     @alive = true                                   # 英雄剛被創造，所以預設為 true，表示英雄被創造時一定是活著的
 
     # 印出被創造的英雄的 attributes
@@ -47,16 +34,12 @@ class Hero
     puts "#{enemy.name} 剩下 #{enemy.hp} 點 HP"
     puts ""
 
-    enemy.die?
-  end
-
-  def die?
-    if hp < 1
-      die
+    if enemy.hp < 1                                 # 生命值小於 1，代表死亡(戰敗)
+      enemy.die                                     # 敵人死亡
     end
   end
 
-  private def die                                           # 代表死亡(戰敗)
+  def die                                           # 代表死亡(戰敗)
     @alive = false
     puts "#{@name} 被打倒了"
   end
